@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,10 +12,6 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Show the application dashboard.
@@ -23,6 +20,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('welcome', [
+            'posts' => Post::with('category')->latest()->paginate(5)
+        ]);
+    }
+
+    public function show(Post $post)
+    {
+        return view('detail', [
+            'post' => $post
+        ]);
     }
 }

@@ -66,6 +66,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+
                             </div>
                             {{-- <div class="mb-4">
                                 <label for="x" class="form-label">Content</label>

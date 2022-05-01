@@ -56,7 +56,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="content" class="form-label">Post content</label>
-                                <textarea name="content" id="content" cols="30" rows="10" class="form-control"></textarea>
+                                <textarea name="content" id="content" cols="30" rows="10" class="form-control">{{ old('content') }}</textarea>
                                 @error('content')
                                     <span class="text-danger" role="alert">
                                         <strong>{{ $message }}</strong>

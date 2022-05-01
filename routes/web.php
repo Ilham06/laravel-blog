@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -16,15 +17,16 @@ use App\Http\Controllers\Admin\CategoryController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Auth::routes(['register' => false]);
 
-Auth::routes();
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/{post:slug}', [HomeController::class, 'show'])->name('post.detail');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Route::resource('category', CategoryController::class, ['as' => 'admin']);
-Route::resource('category', CategoryController::class);
-Route::resource('tag', TagController::class);
-Route::resource('post', PostController::class);
+Route::prefix('admin')
+    ->middleware('auth')
+    ->group(function() {
+         // Route::resource('category', CategoryController::class, ['as' => 'admin']);
+         Route::resource('category', CategoryController::class);
+         Route::resource('tag', TagController::class);
+         Route::resource('post', PostController::class);
+    });

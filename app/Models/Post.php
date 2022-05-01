@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
 {
@@ -35,4 +37,15 @@ class Post extends Model
     {
         return $query->orderBy('created_at', 'desc');
     }
+
+    public function excerp()
+    {
+        return Str::limit($this->content, 250, '...');
+    }
+
+    public function getDate()
+    {
+        return Carbon::parse($this->created_at)->isoFormat('D MMMM Y');
+    }
+    
 }
