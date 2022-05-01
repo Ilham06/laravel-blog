@@ -16,8 +16,18 @@ class Tag extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function post(): BelongsToMany
+    public function post()
     {
         return $this->belongsToMany(Post::class, 'post_tag', 'tag_id', 'post_id');
+    }
+
+    public function scopeLates($query)
+    {
+        return $query->orderBy('created_at', 'desc');
+    }
+
+    public function postCount()
+    {
+        return $this->post->count();
     }
 }

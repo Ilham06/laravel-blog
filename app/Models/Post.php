@@ -16,7 +16,7 @@ class Post extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function category(): BelongsTo
+    public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
@@ -26,8 +26,13 @@ class Post extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function tag(): BelongsToMany
+    public function tag()
     {
         return $this->belongsToMany(Tag::class, 'post_tag', 'post_id', 'tag_id');
+    }
+
+    public function scopeLates($query)
+    {
+        return $query->orderBy('created_at', 'desc');
     }
 }

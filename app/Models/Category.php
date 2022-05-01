@@ -16,8 +16,18 @@ class Category extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function post(): HasMany
+    public function post()
     {
-        return $this->hasMany(Post::class, 'post_id', 'id');
+        return $this->hasMany(Post::class, 'category_id', 'id');
+    }
+
+    public function scopeLates($query)
+    {
+        return $query->orderBy('created_at', 'desc');
+    }
+
+    public function postCount()
+    {
+        return $this->post->count();
     }
 }

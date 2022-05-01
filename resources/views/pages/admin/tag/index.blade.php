@@ -4,17 +4,17 @@
     <div class="container">
         <div class="row">
             <div class="col-12 header mb-3">
-                <h3 class="fw-bold mt-4">Category</h3>
+                <h3 class="fw-bold mt-4">Tag</h3>
                 <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
                     aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/" class="text-decoration-none">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Category</li>
+                        <li class="breadcrumb-item active" aria-current="page">Tag</li>
                     </ol>
                 </nav>
             </div>
             <div class="col">
-                <a href="{{ route('category.create') }}" class="btn btn-sm btn-success mb-2">Add Post</a>
+                <a href="{{ route('tag.create') }}" class="btn btn-sm btn-success mb-2">Add Tag</a>
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('success') }}
@@ -33,16 +33,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($categories as $key => $category)
+                                    @foreach ($tags as $key => $tag)
                                         <tr>
-                                            <td>{{ $category->name }}</td>
-                                            <td>{{ $category->postCount() }}</td>
+                                            <td>{{ $tag->name }}</td>
+                                            <td>{{ $tag->postCount() }}</td>
                                             <td>
-                                                <a href="{{ route('category.edit', $category->id) }}"
+                                                <a href="{{ route('tag.edit', $tag->id) }}"
                                                     class="btn btn-sm btn-primary">Edit</a>
                                                 <form onclick="return confirm('Delete This Data?')"
-                                                    action="{{ route('category.destroy', $category->id) }}"
-                                                    class="d-inline" method="post">
+                                                    action="{{ route('tag.destroy', $tag->id) }}" class="d-inline"
+                                                    method="post">
                                                     @method('delete')
                                                     @csrf
                                                     <button class="btn btn-sm btn-danger">Delete</button>
@@ -55,7 +55,7 @@
                         </div>
                     </div>
                 </div>
-                {{ $categories->links() }}
+                {{ $tags->links() }}
             </div>
         </div>
     </div>
